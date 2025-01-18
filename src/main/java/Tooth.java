@@ -1,5 +1,8 @@
+import java.util.Scanner;
+
 public class Tooth {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         String toothLogo =
                         "  / \\      / \\    \n" +
                         " |           |    \n" +
@@ -10,7 +13,15 @@ public class Tooth {
         System.out.println("____________________________________________________________");
         System.out.println(toothLogo + "Hello I am Tooth\n" + "What do you want?");
         System.out.println("____________________________________________________________");
-        System.out.println("Bye");
+        String echo = "";
+        while (true) {
+            echo = scanner.nextLine();
+            if (echo.equals("bye"))
+                break;
+            System.out.println(echo);
+            System.out.println("____________________________________________________________");
+        }
+        System.out.println("Bye bye");
         System.out.println("____________________________________________________________");
     }
 }
