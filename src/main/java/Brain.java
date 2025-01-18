@@ -13,7 +13,7 @@ public class Brain {
     }
 
     public static void list() {
-        int i = 1;
+        int i = 0;
         System.out.println("____________________________________________________________");
         for (Task task : memory) {
             System.out.println(Integer.toString(i) + ": " + task);
@@ -22,15 +22,40 @@ public class Brain {
         System.out.println("____________________________________________________________");
     }
 
+    public static void mark(int i) {
+        Task item = memory.get(i).complete();
+        memory.set(i, item);
+        System.out.println("____________________________________________________________");
+        System.out.println("Setting as marked: " + item);
+        System.out.println("____________________________________________________________");
+    }
+
+    public static void unmark(int i) {
+        Task item = memory.get(i).incomplete();
+        memory.set(i, item);
+        System.out.println("____________________________________________________________");
+        System.out.println("Setting as unmarked: " + item);
+        System.out.println("____________________________________________________________");
+    }
+
     public static void processing() {
         Scanner scanner = new Scanner(System.in);
         String echo = "";
         while (true) {
             echo = scanner.nextLine();
-            if (echo.equals("bye"))
+            String[] command = echo.split(" ");
+            if (command[0].equals("bye"))
                 break;
-            else if (echo.equals("list"))
+            else if (command[0].equals("list"))
                 list();
+            else if (command[0].equals("mark")) {
+                int i = Integer.parseInt(command[1]);
+                mark(i);
+            }
+            else if (command[0].equals("unmark")) {
+                int i = Integer.parseInt(command[1]);
+                unmark(i);
+            }
             else
                 add(echo);
         }
