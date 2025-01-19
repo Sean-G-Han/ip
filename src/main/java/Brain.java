@@ -1,15 +1,18 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Brain {
     public static List<Task> memory = new ArrayList<>();
 
-    public static void add(String item) {
+    public static void add(Task item) {
         System.out.println("____________________________________________________________");
-        System.out.println("added: " + item);
+        System.out.println("Got it, adding: ");
+        System.out.println(item.toString());
+        System.out.println("Number of Tasks: " + Integer.toString(memory.size() + 1));
         System.out.println("____________________________________________________________");
-        memory.add(Task.of(item));
+        memory.add(item);
     }
 
     public static void list() {
@@ -56,8 +59,11 @@ public class Brain {
                 int i = Integer.parseInt(command[1]);
                 unmark(i);
             }
-            else
-                add(echo);
+            else if (command[0].equals("todo")) {
+                String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
+                ToDo todo = ToDo.of(s);
+                add(todo);
+            }
         }
     }
 }

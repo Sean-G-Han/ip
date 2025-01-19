@@ -1,23 +1,15 @@
-public class Task {
-    String name;
-    boolean done;
+public abstract class Task {
+    protected String name;
+    protected boolean done;
 
-    private Task(String name, boolean done) {
+    protected Task(String name, boolean done) {
         this.name = name;
         this.done = done;
     }
 
-    public static Task of(String name) {
-        return new Task(name, false);
-    }
+    public abstract Task complete();
 
-    public Task complete() {
-        return new Task(this.name, true);
-    }
-
-    public Task incomplete() {
-        return new Task(this.name, false);
-    }
+    public abstract Task incomplete();
 
     @Override
     public String toString() {
