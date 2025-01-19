@@ -7,7 +7,7 @@ public class Brain {
     public static List<Task> memory = new ArrayList<>();
 
     public static void add(Task item) {
-        System.out.println("Got it, adding: ");
+        System.out.println("Got it, adding:");
         System.out.println(item.toString());
         System.out.println("Number of Tasks: " + Integer.toString(memory.size() + 1));
         memory.add(item);
