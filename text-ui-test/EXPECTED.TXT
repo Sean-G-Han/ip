@@ -8,15 +8,28 @@ ____________________________________________________________
 Hello I am Tooth
 What do you want?
 ____________________________________________________________
+Tooth found an error: Memory is Empty
+Tooth found an error: Todo requires a description
 Got it, adding:
-[T][ ] make bread
+[T][ ] get water
 Number of Tasks: 1
+Tooth found an error: Event requires a description
+Tooth found an error: Missing /by field
+Tooth found an error: Missing the title
 Got it, adding:
-[D][ ] eat bread (Due on: before it expires)
+[D][ ] drink water (Due on: sometime later)
 Number of Tasks: 2
-Setting as marked: [T][X] make bread
-0: [T][X] make bread
-1: [D][ ] eat bread (Due on: before it expires)
+Got it, adding:
+[E][ ] water party (From: tonight, To: midnight)
+Number of Tasks: 3
+0: [T][ ] get water
+1: [D][ ] drink water (Due on: sometime later)
+2: [E][ ] water party (From: tonight, To: midnight)
+Tooth found an error: Index 300 is out of range
+Setting as marked: [T][X] get water
+0: [T][X] get water
+1: [D][ ] drink water (Due on: sometime later)
+2: [E][ ] water party (From: tonight, To: midnight)
 ____________________________________________________________
 Bye bye
 ____________________________________________________________
