@@ -30,6 +30,11 @@ Setting as marked: [T][X] get water
 0: [T][X] get water
 1: [D][ ] drink water (Due on: sometime later)
 2: [E][ ] water party (From: tonight, To: midnight)
+Tooth found an error: Command remove does not exist
+Tooth found an error: Command remove does not exist
+0: [T][X] get water
+1: [D][ ] drink water (Due on: sometime later)
+2: [E][ ] water party (From: tonight, To: midnight)
 ____________________________________________________________
 Bye bye
 ____________________________________________________________

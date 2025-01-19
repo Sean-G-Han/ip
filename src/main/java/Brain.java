@@ -14,7 +14,7 @@ public class Brain {
     }
 
     public static void list() throws MemoryIsEmptyException {
-        if (memory.size() == 0) {
+        if (memory.isEmpty()) {
             throw new MemoryIsEmptyException("Memory is Empty");
         } else {
             int i = 0;
@@ -26,7 +26,7 @@ public class Brain {
     }
 
     public static void mark(int i) throws InvalidParamException{
-        if (i > memory.size()) {
+        if (i > memory.size() - 1) {
             throw new InvalidParamException("Index " + i + " is out of range");
         } else {
             Task item = memory.get(i).complete();
@@ -36,7 +36,7 @@ public class Brain {
     }
 
     public static void unmark(int i) throws InvalidParamException {
-        if (i > memory.size()) {
+        if (i > memory.size() - 1) {
             throw new InvalidParamException("Index " + i + " is out of range");
         } else {
             Task item = memory.get(i).incomplete();
@@ -45,6 +45,16 @@ public class Brain {
         }
     }
 
+    public static void delete(int i) throws InvalidParamException {
+        if (i > memory.size() - 1) {
+            throw new InvalidParamException("Index " + i + " is out of range");
+        } else {
+            System.out.println("Got it, removing:");
+            System.out.println(memory.get(i).toString());
+            System.out.println("Number of Tasks: " + Integer.toString(memory.size() - 1));
+            memory.remove(i);
+        }
+    }
     public static void todo(String s) throws InvalidParamException {
         if (s.isEmpty()) {
             throw new InvalidParamException("Todo requires a description");
@@ -111,7 +121,10 @@ public class Brain {
                     event(s);
                 else if (command[0].equals("deadline"))
                     deadline(s);
-                else
+                else if (command[0].equals("delete")) {
+                    int i = Integer.parseInt(command[1]);
+                    delete(i);
+                } else
                     throw new InvalidCommandException("Command " + command[0] + " does not exist");
 
             } catch (ToothException e) {
