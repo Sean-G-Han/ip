@@ -43,7 +43,7 @@ public class Brain {
 
     public static void processing() {
         Scanner scanner = new Scanner(System.in);
-        String echo = "";
+        String echo;
         while (true) {
             echo = scanner.nextLine();
             String[] command = echo.split(" ");
@@ -63,6 +63,24 @@ public class Brain {
                 String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
                 ToDo todo = ToDo.of(s);
                 add(todo);
+            }
+            else if (command[0].equals("event")) {
+                String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
+                int fromIndex = s.indexOf("/from") + 6;
+                int toIndex = s.indexOf("/to") + 4;
+                String from = s.substring(fromIndex, toIndex - 4).trim();
+                String to = s.substring(toIndex).trim();
+                s = s.substring(0, fromIndex - 6).trim();
+                Event event = Event.of(s, from, to);
+                add(event);
+            }
+            else if (command[0].equals("deadline")) {
+                String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
+                int byIndex = s.indexOf("/by") + 4;
+                String by = s.substring(byIndex).trim();
+                s = s.substring(0, byIndex - 4).trim();
+                Deadline deadline = Deadline.of(s, by);
+                add(deadline);
             }
         }
     }
