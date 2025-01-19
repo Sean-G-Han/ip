@@ -33,12 +33,35 @@ public class Brain {
         System.out.println("Setting as unmarked: " + item);
     }
 
+    public static void todo(String s) {
+        ToDo todo = ToDo.of(s);
+        add(todo);
+    }
+
+    public static void event(String s) {
+        int fromIndex = s.indexOf("/from") + 6;
+        int toIndex = s.indexOf("/to") + 4;
+        String from = s.substring(fromIndex, toIndex - 4).trim();
+        String to = s.substring(toIndex).trim();
+        String item = s.substring(0, fromIndex - 6).trim();
+        Event event = Event.of(item, from, to);
+        add(event);
+    }
+
+    public static void deadline(String s) {
+        int byIndex = s.indexOf("/by") + 4;
+        String by = s.substring(byIndex).trim();
+        String item = s.substring(0, byIndex - 4).trim();
+        Deadline deadline = Deadline.of(item, by);
+        add(deadline);
+    }
+
     public static void processing() {
         Scanner scanner = new Scanner(System.in);
-        String echo;
         while (true) {
-            echo = scanner.nextLine();
-            String[] command = echo.split(" ");
+            String input = scanner.nextLine();
+            String[] command = input.split(" ");
+            String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
             if (command[0].equals("bye"))
                 break;
             else if (command[0].equals("list"))
@@ -51,29 +74,12 @@ public class Brain {
                 int i = Integer.parseInt(command[1]);
                 unmark(i);
             }
-            else if (command[0].equals("todo")) {
-                String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
-                ToDo todo = ToDo.of(s);
-                add(todo);
-            }
-            else if (command[0].equals("event")) {
-                String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
-                int fromIndex = s.indexOf("/from") + 6;
-                int toIndex = s.indexOf("/to") + 4;
-                String from = s.substring(fromIndex, toIndex - 4).trim();
-                String to = s.substring(toIndex).trim();
-                s = s.substring(0, fromIndex - 6).trim();
-                Event event = Event.of(s, from, to);
-                add(event);
-            }
-            else if (command[0].equals("deadline")) {
-                String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
-                int byIndex = s.indexOf("/by") + 4;
-                String by = s.substring(byIndex).trim();
-                s = s.substring(0, byIndex - 4).trim();
-                Deadline deadline = Deadline.of(s, by);
-                add(deadline);
-            }
+            else if (command[0].equals("todo"))
+                todo(s);
+            else if (command[0].equals("event"))
+                event(s);
+            else if (command[0].equals("deadline"))
+                deadline(s);
         }
     }
 }
