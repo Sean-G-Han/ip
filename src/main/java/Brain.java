@@ -7,38 +7,30 @@ public class Brain {
     public static List<Task> memory = new ArrayList<>();
 
     public static void add(Task item) {
-        System.out.println("____________________________________________________________");
         System.out.println("Got it, adding: ");
         System.out.println(item.toString());
         System.out.println("Number of Tasks: " + Integer.toString(memory.size() + 1));
-        System.out.println("____________________________________________________________");
         memory.add(item);
     }
 
     public static void list() {
         int i = 0;
-        System.out.println("____________________________________________________________");
         for (Task task : memory) {
             System.out.println(Integer.toString(i) + ": " + task);
             i++;
         }
-        System.out.println("____________________________________________________________");
     }
 
     public static void mark(int i) {
         Task item = memory.get(i).complete();
         memory.set(i, item);
-        System.out.println("____________________________________________________________");
         System.out.println("Setting as marked: " + item);
-        System.out.println("____________________________________________________________");
     }
 
     public static void unmark(int i) {
         Task item = memory.get(i).incomplete();
         memory.set(i, item);
-        System.out.println("____________________________________________________________");
         System.out.println("Setting as unmarked: " + item);
-        System.out.println("____________________________________________________________");
     }
 
     public static void processing() {
