@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,16 +8,65 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class Brain {
+
     public static List<Task> memory = new ArrayList<>();
 
-    public static void save() throws IOException {
-        File f = new File("src/main/save.txt");
-        FileWriter fw = new FileWriter("src/main/save.txt");
-        for (Task t : memory) {
-            fw.append(t.toString());
-            fw.append("\n");
+    public static void save() {
+        try {
+            File f = new File("src/main/save.txt");
+            FileWriter fw = new FileWriter(f);
+            for (Task t : memory) {
+                fw.append(t.serialize());
+                fw.append("\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error : File is a directory not a file");
         }
-        fw.close();
+    }
+
+    public static void load() {
+        try {
+            File f = new File("src/main/save.txt");
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                try {
+                    Task t = create(s.nextLine());
+                    memory.add(t);
+                } catch (InvalidFileFormatException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Warning: [save.txt] not found. If this is the first time booting the app, please ignore.");
+        }
+    }
+
+    public static Task create(String serializedString) throws InvalidFileFormatException{
+        String[] parts = serializedString.split("\\|");
+        if (parts[0].equals("T")) {
+            if (parts.length != 3)
+                throw new InvalidFileFormatException("Wrong Number of Parameters: " + serializedString);
+            String name = parts[1];
+            boolean done = Boolean.parseBoolean(parts[2]);
+            return ToDo.of(name, done);
+        } else if (parts[0].equals("D")) {
+            if (parts.length != 4)
+                throw new InvalidFileFormatException("Wrong Number of Parameters: " + serializedString);
+            String name = parts[1];
+            String deadline = parts[2];
+            boolean done = Boolean.parseBoolean(parts[3]);
+            return Deadline.of(name, done, deadline);
+        } else if (parts[0].equals("E")) {
+            if (parts.length != 5)
+                throw new InvalidFileFormatException("Wrong Number of Parameters: " + serializedString);
+            String name = parts[1];
+            String from = parts[2];
+            String to = parts[3];
+            boolean done = Boolean.parseBoolean(parts[4]);
+            return Event.of(name, done, from, to);
+        }
+        throw new InvalidFileFormatException("Header is wrong");
     }
 
     public static void add(Task item) {
@@ -118,14 +168,8 @@ public class Brain {
                 String input = scanner.nextLine();
                 String[] command = input.split(" ");
                 String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
-                if (command[0].equals("bye")) {
-                    try {
-                        save();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                if (command[0].equals("bye"))
                     break;
-                }
                 else if (command[0].equals("list"))
                     list();
                 else if (command[0].equals("mark")) {
