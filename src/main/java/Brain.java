@@ -22,11 +22,15 @@ public class Brain {
             fw.close();
         } catch (IOException e) {
             System.out.println("Error : File is a directory not a file");
+        } finally {
+            System.out.println("Saving :");
+            list();
         }
     }
 
     public static void load() {
         try {
+            memory.clear();
             File f = new File("src/main/save.txt");
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
@@ -39,6 +43,9 @@ public class Brain {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Warning: [save.txt] not found. If this is the first time booting the app, please ignore.");
+        } finally {
+            System.out.println("Loading :");
+            list();
         }
     }
 
@@ -187,6 +194,10 @@ public class Brain {
                 else if (command[0].equals("delete")) {
                     int i = Integer.parseInt(command[1]);
                     delete(i);
+                } else if (command[0].equals("save")) {
+                    save();
+                } else if (command[0].equals("load")) {
+                    load();
                 } else
                     throw new InvalidCommandException("Command " + command[0] + " does not exist");
 
