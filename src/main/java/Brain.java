@@ -1,10 +1,23 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Brain {
     public static List<Task> memory = new ArrayList<>();
+
+    public static void save() throws IOException {
+        File f = new File("src/main/save.txt");
+        FileWriter fw = new FileWriter("src/main/save.txt");
+        for (Task t : memory) {
+            fw.append(t.toString());
+            fw.append("\n");
+        }
+        fw.close();
+    }
 
     public static void add(Task item) {
         System.out.println("Got it, adding:");
@@ -105,8 +118,14 @@ public class Brain {
                 String input = scanner.nextLine();
                 String[] command = input.split(" ");
                 String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
-                if (command[0].equals("bye"))
+                if (command[0].equals("bye")) {
+                    try {
+                        save();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
+                }
                 else if (command[0].equals("list"))
                     list();
                 else if (command[0].equals("mark")) {
