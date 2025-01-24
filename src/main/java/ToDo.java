@@ -7,19 +7,23 @@ public class ToDo extends Task {
         return new ToDo(name, false);
     }
 
+    public static ToDo of(String name, boolean done) {
+        return new ToDo(name, done);
+    }
+
     @Override
     public ToDo complete() {
         return new ToDo(this.name, true);
     }
 
     @Override
-    public String serialize() {
-        return "T|" + name;
+    public ToDo incomplete() {
+        return new ToDo(this.name, false);
     }
 
     @Override
-    public ToDo incomplete() {
-        return new ToDo(this.name, false);
+    public String serialize() {
+        return "T|" + name + "|" + done;
     }
 
     @Override

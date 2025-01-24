@@ -9,6 +9,10 @@ public class Deadline extends Task {
         return new Deadline(name, false, deadline);
     }
 
+    public static Deadline of(String name, boolean done, String deadline) {
+        return new Deadline(name, done, deadline);
+    }
+
     @Override
     public Deadline complete() {
         return new Deadline(this.name, true, this.deadline);
@@ -21,7 +25,7 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        return "D|" + name + "|" + deadline;
+        return "D|" + name + "|" + deadline  + "|" + done;
     }
 
     @Override

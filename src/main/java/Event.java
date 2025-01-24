@@ -10,6 +10,10 @@ public class Event extends Task {
         return new Event(name, false, from, to);
     }
 
+    public static Event of(String name, boolean done, String from, String to) {
+        return new Event(name, done, from, to);
+    }
+
     @Override
     public Event complete() {
         return new Event(this.name, true, this.from, this.to);
@@ -22,7 +26,7 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        return "E|" + name + "|" + to + "|" + from;
+        return "E|" + name + "|" + to + "|" + from  + "|" + done;
     }
 
     @Override
