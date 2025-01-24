@@ -21,6 +21,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String serialize() {
+        return "E|" + name + "|" + to + "|" + from;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (From: " + from + ", To: " + to + ")";
     }

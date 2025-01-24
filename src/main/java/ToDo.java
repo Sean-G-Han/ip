@@ -13,6 +13,11 @@ public class ToDo extends Task {
     }
 
     @Override
+    public String serialize() {
+        return "T|" + name;
+    }
+
+    @Override
     public ToDo incomplete() {
         return new ToDo(this.name, false);
     }

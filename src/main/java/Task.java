@@ -11,6 +11,8 @@ public abstract class Task {
 
     public abstract Task incomplete();
 
+    public  abstract String serialize();
+
     @Override
     public String toString() {
         return (done ? "[X] " : "[ ] ") + name;
