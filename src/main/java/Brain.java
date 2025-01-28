@@ -1,54 +1,11 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
 
 public class Brain {
 
-    public static List<Task> memory = new ArrayList<>();
-
-    public static void save() {
-        try {
-            File f = new File("src/main/save.txt");
-            FileWriter fw = new FileWriter(f);
-            for (Task t : memory) {
-                fw.append(t.serialize());
-                fw.append("\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Error : File is a directory not a file");
-        } finally {
-            System.out.println("Saving :");
-            list();
-        }
-    }
-
-    public static void load() {
-        try {
-            memory.clear();
-            File f = new File("src/main/save.txt");
-            Scanner s = new Scanner(f);
-            while (s.hasNext()) {
-                try {
-                    Task t = create(s.nextLine());
-                    memory.add(t);
-                } catch (InvalidFileFormatException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Warning: [save.txt] not found. If this is the first time booting the app, please ignore.");
-        } finally {
-            System.out.println("Loading :");
-            list();
-        }
-    }
+    public static ArrayList<Task> memory = new ArrayList<>();
 
     public static Task create(String serializedString) throws InvalidFileFormatException{
         String[] parts = serializedString.split("\\|");
@@ -198,9 +155,9 @@ public class Brain {
                     int i = Integer.parseInt(command[1]);
                     delete(i);
                 } else if (command[0].equals("save")) {
-                    save();
+                    Storage.save(memory);
                 } else if (command[0].equals("load")) {
-                    load();
+                    Storage.load(memory);
                 } else
                     throw new InvalidCommandException("Command " + command[0] + " does not exist");
 
