@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.FileWriter;
 
 public class Brain {
-    //Test Branch Comment
-    //Test Comment 2
 
     public static List<Task> memory = new ArrayList<>();
 
