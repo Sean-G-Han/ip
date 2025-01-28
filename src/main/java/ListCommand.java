@@ -7,6 +7,7 @@ public class ListCommand implements Command {
         ui.say("List:");
         tasks.forEach((t) -> {
             System.out.println(index + " " + t.toString());
+            index++;
         });
     }
 }

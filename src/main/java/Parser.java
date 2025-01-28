@@ -15,14 +15,30 @@ public class Parser {
         String s = String.join(" ", Arrays.copyOfRange(pieces, 1, pieces.length));
 
         switch (command) {
+            case "bye":
+                return new ByeCommand();
             case "list":
+                if (pieces.length != 1)
+                    throw new InvalidParamException("List does not have any description");
                 return new ListCommand();
 
             case "mark":
-                return new MarkCommand(Integer.parseInt(s));
+                if (pieces.length != 2)
+                    throw new InvalidParamException("Mark only requires 1 parameter (Index)");
+                try {
+                    return new MarkCommand(Integer.parseInt(s));
+                } catch (RuntimeException e) {
+                    throw new InvalidParamException(e.getMessage());
+                }
 
             case "unmark":
-                return new UnmarkCommand(Integer.parseInt(s));
+                if (pieces.length != 2)
+                    throw new InvalidParamException("Unmark only requires 1 parameter (Index)");
+                try {
+                    return new UnmarkCommand(Integer.parseInt(s));
+                } catch (RuntimeException e) {
+                    throw new InvalidParamException(e.getMessage());
+                }
 
             case "todo":
                 if (s.isEmpty()) {
@@ -59,7 +75,13 @@ public class Parser {
                 return new DeadlineCommand(dealineString, by);
 
             case "delete":
-                return new DeleteCommand(Integer.parseInt(s));
+                if (pieces.length != 2)
+                    throw new InvalidParamException("Delete only requires 1 parameter (Index)");
+                try {
+                    return new DeleteCommand(Integer.parseInt(s));
+                } catch (RuntimeException e) {
+                    throw new InvalidParamException(e.getMessage());
+                }
 
             case "save":
                 return new SaveCommand();

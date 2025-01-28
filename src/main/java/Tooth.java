@@ -15,8 +15,10 @@ public class Tooth {
                 String input = scanner.nextLine();
                 Command c = parser.parse(input);
                 c.execute(tasks, ui, storage);
+                if (c instanceof ByeCommand)
+                    break;
             } catch (ToothException e) {
-                System.out.println(e.getMessage());
+                ui.complain(e.getMessage());
             }
         }
     }

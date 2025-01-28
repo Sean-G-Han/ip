@@ -16,6 +16,7 @@ public class UI {
     public void welcome() {
         System.out.println(logo);
         System.out.println("Welcome to Tooth");
+        line();
     }
 
     public void bye() {
@@ -23,12 +24,21 @@ public class UI {
         System.out.println(logo);
     }
 
+    private void line() {
+        System.out.println("-------------------------------");
+    }
+
     public void say(String sentence) {
-        System.out.println("""
-                 ∧,,,,∧
-                ( -O·O-)
-                /    <3
-                """);
+        line();
+        System.out.println("≽^  •⩊•^≼");
         System.out.println(sentence);
+        line();
+    }
+
+    public void complain(String sentence) {
+        line();
+        System.out.println("≽^ ꐦㅍ_ㅍ^≼");
+        System.out.println(sentence);
+        line();
     }
 }

@@ -22,9 +22,7 @@ public class Storage {
             });
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error : File is a directory not a file");
-        } finally {
-            System.out.println("Saving :");
+            throw new InvalidFileFormatException("Error : File is a directory not a file");
         }
     }
 
@@ -35,16 +33,14 @@ public class Storage {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 try {
-                    Task t = Brain.create(s.nextLine());
+                    Task t = FileR.create(s.nextLine());
                     memory.add(t);
                 } catch (InvalidFileFormatException e) {
                     System.out.println(e.getMessage());
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Warning: [save.txt] not found. If this is the first time booting the app, please ignore.");
-        } finally {
-            System.out.println("Loading :");
+            throw new InvalidFileFormatException("Warning: [save.txt] not found. If this is the first time booting the app, please ignore.");
         }
     }
 }

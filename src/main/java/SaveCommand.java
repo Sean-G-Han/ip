@@ -4,5 +4,6 @@ public class SaveCommand implements Command {
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
         storage.save(tasks);
+        ui.say("Saved tasks");
     }
 }
