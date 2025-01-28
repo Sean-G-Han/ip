@@ -1,15 +1,17 @@
+import java.time.LocalDate;
+
 public class Deadline extends Task {
-    String deadline;
-    private Deadline(String name, boolean done, String deadline){
+    LocalDate deadline;
+    private Deadline(String name, boolean done, LocalDate deadline) {
         super(name, done);
         this.deadline = deadline;
     }
 
-    public static Deadline of(String name, String deadline) {
+    public static Deadline of(String name, LocalDate deadline) {
         return new Deadline(name, false, deadline);
     }
 
-    public static Deadline of(String name, boolean done, String deadline) {
+    public static Deadline of(String name, boolean done, LocalDate deadline) {
         return new Deadline(name, done, deadline);
     }
 

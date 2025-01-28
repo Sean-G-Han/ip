@@ -1,16 +1,18 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
-    String from, to;
-    private Event(String name, boolean done, String from, String to){
+    LocalDate from, to;
+    private Event(String name, boolean done, LocalDate from, LocalDate to){
         super(name, done);
         this.from = from;
         this.to = to;
     }
 
-    public static Event of(String name, String from, String to) {
+    public static Event of(String name, LocalDate from, LocalDate to) {
         return new Event(name, false, from, to);
     }
 
-    public static Event of(String name, boolean done, String from, String to) {
+    public static Event of(String name, boolean done, LocalDate from, LocalDate to) {
         return new Event(name, done, from, to);
     }
 

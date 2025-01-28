@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -61,15 +62,15 @@ public class Brain {
             if (parts.length != 4)
                 throw new InvalidFileFormatException("Wrong Number of Parameters: " + serializedString);
             String name = parts[1];
-            String deadline = parts[2];
+            LocalDate deadline = LocalDate.parse(parts[2]);
             boolean done = Boolean.parseBoolean(parts[3]);
             return Deadline.of(name, done, deadline);
         } else if (parts[0].equals("E")) {
             if (parts.length != 5)
                 throw new InvalidFileFormatException("Wrong Number of Parameters: " + serializedString);
             String name = parts[1];
-            String from = parts[2];
-            String to = parts[3];
+            LocalDate from = LocalDate.parse(parts[2]);
+            LocalDate to = LocalDate.parse(parts[3]);
             boolean done = Boolean.parseBoolean(parts[4]);
             return Event.of(name, done, from, to);
         }
@@ -144,8 +145,8 @@ public class Brain {
         } else if (fromIndex == 0) {
             throw new InvalidParamException("Missing the title");
         } else {
-            String from = s.substring(fromIndex + 6, toIndex).trim();
-            String to = s.substring(toIndex + 4).trim();
+            LocalDate from = LocalDate.parse(s.substring(fromIndex + 6, toIndex).trim());
+            LocalDate to = LocalDate.parse(s.substring(toIndex + 4).trim());
             String item = s.substring(0, fromIndex).trim();
             Event event = Event.of(item, from, to);
             add(event);
@@ -161,7 +162,7 @@ public class Brain {
         } else if (byIndex == 0) {
             throw new InvalidParamException("Missing the title");
         } else {
-            String by = s.substring(byIndex + 4).trim();
+            LocalDate by = LocalDate.parse(s.substring(byIndex + 4).trim());
             String item = s.substring(0, byIndex).trim();
             Deadline deadline = Deadline.of(item, by);
             add(deadline);
@@ -173,6 +174,8 @@ public class Brain {
         while (true) {
             try {
                 String input = scanner.nextLine();
+                if (input.indexOf('|') > -1)
+                    throw new InvalidCommandException("Character [|] is not allowed");
                 String[] command = input.split(" ");
                 String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
                 if (command[0].equals("bye"))
