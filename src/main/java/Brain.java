@@ -81,43 +81,6 @@ public class Brain {
     }
 
     public static void processing() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            try {
-                String input = scanner.nextLine();
-                if (input.indexOf('|') > -1)
-                    throw new InvalidCommandException("Character [|] is not allowed");
-                String[] command = input.split(" ");
-                String s = String.join(" ", Arrays.copyOfRange(command, 1, command.length));
-                if (command[0].equals("bye"))
-                    break;
-                else if (command[0].equals("list"))
-                    list();
-                else if (command[0].equals("mark")) {
-                    int i = Integer.parseInt(command[1]);
-                    memory.mark(i);
-                } else if (command[0].equals("unmark")) {
-                    int i = Integer.parseInt(command[1]);
-                    memory.unmark(i);
-                } else if (command[0].equals("todo"))
-                    todo(s);
-                else if (command[0].equals("event"))
-                    event(s);
-                else if (command[0].equals("deadline"))
-                    deadline(s);
-                else if (command[0].equals("delete")) {
-                    int i = Integer.parseInt(command[1]);
-                    memory.delete(i);
-                } else if (command[0].equals("save")) {
-                    Storage.save(memory);
-                } else if (command[0].equals("load")) {
-                    Storage.load(memory);
-                } else
-                    throw new InvalidCommandException("Command " + command[0] + " does not exist");
-
-            } catch (ToothException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        Parser.process();
     }
 }
