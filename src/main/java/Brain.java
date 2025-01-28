@@ -1,13 +1,12 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Brain {
 
-    public static ArrayList<Task> memory = new ArrayList<>();
+    public static TaskList memory = new TaskList();
 
-    public static Task create(String serializedString) throws InvalidFileFormatException{
+    public static Task create(String serializedString) throws InvalidFileFormatException {
         String[] parts = serializedString.split("\\|");
         if (parts[0].equals("T")) {
             if (parts.length != 3)
@@ -34,61 +33,16 @@ public class Brain {
         throw new InvalidFileFormatException("Header is wrong");
     }
 
-    public static void add(Task item) {
-        System.out.println("Got it, adding:");
-        System.out.println(item.toString());
-        System.out.println("Number of Tasks: " + Integer.toString(memory.size() + 1));
-        memory.add(item);
-    }
-
     public static void list() throws MemoryIsEmptyException {
-        if (memory.isEmpty()) {
-            throw new MemoryIsEmptyException("Memory is Empty");
-        } else {
-            int i = 0;
-            for (Task task : memory) {
-                System.out.println(Integer.toString(i) + ": " + task);
-                i++;
-            }
-        }
+        memory.forEach(System.out::println);
     }
 
-    public static void mark(int i) throws InvalidParamException{
-        if (i > memory.size() - 1) {
-            throw new InvalidParamException("Index " + i + " is out of range");
-        } else {
-            Task item = memory.get(i).complete();
-            memory.set(i, item);
-            System.out.println("Setting as marked: " + item);
-        }
-    }
-
-    public static void unmark(int i) throws InvalidParamException {
-        if (i > memory.size() - 1) {
-            throw new InvalidParamException("Index " + i + " is out of range");
-        } else {
-            Task item = memory.get(i).incomplete();
-            memory.set(i, item);
-            System.out.println("Setting as unmarked: " + item);
-        }
-    }
-
-    public static void delete(int i) throws InvalidParamException {
-        if (i > memory.size() - 1) {
-            throw new InvalidParamException("Index " + i + " is out of range");
-        } else {
-            System.out.println("Got it, removing:");
-            System.out.println(memory.get(i).toString());
-            System.out.println("Number of Tasks: " + Integer.toString(memory.size() - 1));
-            memory.remove(i);
-        }
-    }
     public static void todo(String s) throws InvalidParamException {
         if (s.isEmpty()) {
             throw new InvalidParamException("Todo requires a description");
         } else {
             ToDo todo = ToDo.of(s);
-            add(todo);
+            memory.add(todo);
         }
     }
 
@@ -106,7 +60,7 @@ public class Brain {
             LocalDate to = LocalDate.parse(s.substring(toIndex + 4).trim());
             String item = s.substring(0, fromIndex).trim();
             Event event = Event.of(item, from, to);
-            add(event);
+            memory.add(event);
         }
     }
 
@@ -122,7 +76,7 @@ public class Brain {
             LocalDate by = LocalDate.parse(s.substring(byIndex + 4).trim());
             String item = s.substring(0, byIndex).trim();
             Deadline deadline = Deadline.of(item, by);
-            add(deadline);
+            memory.add(deadline);
         }
     }
 
@@ -141,10 +95,10 @@ public class Brain {
                     list();
                 else if (command[0].equals("mark")) {
                     int i = Integer.parseInt(command[1]);
-                    mark(i);
+                    memory.mark(i);
                 } else if (command[0].equals("unmark")) {
                     int i = Integer.parseInt(command[1]);
-                    unmark(i);
+                    memory.unmark(i);
                 } else if (command[0].equals("todo"))
                     todo(s);
                 else if (command[0].equals("event"))
@@ -153,7 +107,7 @@ public class Brain {
                     deadline(s);
                 else if (command[0].equals("delete")) {
                     int i = Integer.parseInt(command[1]);
-                    delete(i);
+                    memory.delete(i);
                 } else if (command[0].equals("save")) {
                     Storage.save(memory);
                 } else if (command[0].equals("load")) {

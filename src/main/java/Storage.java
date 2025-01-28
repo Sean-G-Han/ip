@@ -6,14 +6,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    public static void save(ArrayList<Task> memory) {
+    public static void save(TaskList memory) {
         try {
             File f = new File("src/main/save.txt");
             FileWriter fw = new FileWriter(f);
-            for (Task t : memory) {
-                fw.append(t.serialize());
-                fw.append("\n");
-            }
+            memory.forEach((t) -> {
+                try {
+                    fw.append(t.serialize());
+                    fw.append("\n");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             fw.close();
         } catch (IOException e) {
             System.out.println("Error : File is a directory not a file");
@@ -22,7 +26,7 @@ public class Storage {
         }
     }
 
-    public static void load(ArrayList<Task> memory) {
+    public static void load(TaskList memory) {
         try {
             memory.clear();
             File f = new File("src/main/save.txt");
