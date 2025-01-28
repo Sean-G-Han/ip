@@ -73,10 +73,6 @@ public class Brain {
             String item = s.substring(0, byIndex).trim();
             Deadline deadline = Deadline.of(item, by);
             memory.add(deadline);
-        }    }
-
-    public static void processing(Storage storage, TaskList tasks, UI ui) {
-        Parser parser = new Parser(storage, tasks, ui);
-        parser.process();
+        }
     }
 }

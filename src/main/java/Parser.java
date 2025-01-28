@@ -1,32 +1,12 @@
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Parser {
 
-    Storage storage;
-    TaskList memory;
-    UI ui;
+    public Parser() {};
 
-    public Parser(Storage storage, TaskList tasks, UI ui) {
-        this.storage = storage;
-        this.memory = tasks;
-        this.ui = ui;
-    }
-
-    public void process() {
-        Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
-        while (!exit) {
-            try {
-                String input = scanner.nextLine();
-                exit = parse(input);
-            } catch (ToothException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    public boolean parse(String input) throws InvalidParamException {
+    public Command parse(String input) throws InvalidParamException {
         if (input.indexOf('|') > -1)
             throw new InvalidCommandException("Character [|] is not allowed");
 
@@ -35,61 +15,60 @@ public class Parser {
         String s = String.join(" ", Arrays.copyOfRange(pieces, 1, pieces.length));
 
         switch (command) {
-            case "bye":
-                return true;
-
             case "list":
-                Brain.list(memory);
-                ui.say("Here is the list of Task");
-                break;
+                return new ListCommand();
 
             case "mark":
-                int markIndex = Integer.parseInt(s);
-                memory.mark(markIndex);
-                ui.say("Marked task" + markIndex);
-                break;
+                return new MarkCommand(Integer.parseInt(s));
 
             case "unmark":
-                int unmarkIndex = Integer.parseInt(s);
-                memory.unmark(unmarkIndex);
-                ui.say("Unmarked task" + unmarkIndex);
-                break;
+                return new UnmarkCommand(Integer.parseInt(s));
 
             case "todo":
-                Brain.todo(s, memory);
-                ui.say("Adding Task [todo: " + s + "]");
-                break;
+                if (s.isEmpty()) {
+                    throw new InvalidParamException("Todo requires a description");
+                }
+                return new TodoCommand(s);
 
             case "event":
-                Brain.event(s, memory);
-                ui.say("Adding Task [event: " + s + "]");
-                break;
+                int fromIndex = s.indexOf("/from");
+                int toIndex = s.indexOf("/to");
+                if (s.isEmpty()) {
+                    throw new InvalidParamException("Event requires a description");
+                } else if (fromIndex == -1 || toIndex == -1) {
+                    throw new InvalidParamException("Missing either /to or /from field");
+                } else if (fromIndex == 0) {
+                    throw new InvalidParamException("Missing the title");
+                }
+                LocalDate from = LocalDate.parse(s.substring(fromIndex + 6, toIndex).trim());
+                LocalDate to = LocalDate.parse(s.substring(toIndex + 4).trim());
+                String eventString = s.substring(0, fromIndex).trim();
+                return new EventCommand(eventString, from, to);
 
             case "deadline":
-                Brain.deadline(s, memory);
-                ui.say("Adding Task [deadline: " + s + "]");
-                break;
+                int byIndex = s.indexOf("/by");
+                if (s.isEmpty()) {
+                    throw new InvalidParamException("Deadline requires a description");
+                } else if (byIndex == -1) {
+                    throw new InvalidParamException("Missing either /to or /from field");
+                } else if (byIndex == 0) {
+                    throw new InvalidParamException("Missing the title");
+                }
+                LocalDate by = LocalDate.parse(s.substring(byIndex + 4).trim());
+                String dealineString = s.substring(0, byIndex).trim();
+                return new DeadlineCommand(dealineString, by);
 
             case "delete":
-                int deleteIndex = Integer.parseInt(s);
-                ui.say("Deleting" + deleteIndex);
-                memory.delete(deleteIndex);
-                break;
+                return new DeleteCommand(Integer.parseInt(s));
 
             case "save":
-                storage.save(memory);
-                ui.say("Data Saved");
-                break;
+                return new SaveCommand();
 
             case "load":
-                storage.load(memory);
-                ui.say("Data Loaded");
-                break;
+                return new LoadCommand();
 
             default:
                 throw new InvalidCommandException("Command " + command + " does not exist");
         }
-
-        return false;
     }
 }
