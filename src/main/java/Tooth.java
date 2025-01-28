@@ -1,4 +1,9 @@
-import java.io.IOException;
+package tooth.stuff;
+
+import tooth.command.ByeCommand;
+import tooth.command.Command;
+import tooth.exception.ToothException;
+
 import java.util.Scanner;
 
 public class Tooth {

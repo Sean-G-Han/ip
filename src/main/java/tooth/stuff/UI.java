@@ -15,7 +15,7 @@ public class UI {
 
     public void welcome() {
         System.out.println(logo);
-        System.out.println("Welcome to Tooth");
+        System.out.println("Welcome to tooth.stuff.Tooth");
         line();
     }
 
