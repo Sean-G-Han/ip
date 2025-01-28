@@ -1,3 +1,6 @@
+package tooth.command;
+import tooth.stuff.*;
+
 public class ByeCommand implements Command {
     public ByeCommand() {};
 

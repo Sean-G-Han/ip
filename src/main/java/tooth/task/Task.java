@@ -1,3 +1,5 @@
+package tooth.task;
+
 public abstract class Task {
     protected String name;
     protected boolean done;

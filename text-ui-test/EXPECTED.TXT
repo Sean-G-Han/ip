@@ -13,7 +13,7 @@ Tooth found an error: Todo requires a description
 Got it, adding:
 [T][ ] get water
 Number of Tasks: 1
-Tooth found an error: Event requires a description
+Tooth found an error: tooth.task.Event requires a description
 Tooth found an error: Missing /by field
 Tooth found an error: Missing the title
 Got it, adding:
@@ -30,8 +30,8 @@ Setting as marked: [T][X] get water
 0: [T][X] get water
 1: [D][ ] drink water (Due on: sometime later)
 2: [E][ ] water party (From: tonight, To: midnight)
-Tooth found an error: Command remove does not exist
-Tooth found an error: Command remove does not exist
+Tooth found an error: tooth.command.Command remove does not exist
+Tooth found an error: tooth.command.Command remove does not exist
 0: [T][X] get water
 1: [D][ ] drink water (Due on: sometime later)
 2: [E][ ] water party (From: tonight, To: midnight)

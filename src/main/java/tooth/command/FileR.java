@@ -1,3 +1,11 @@
+package tooth.command;
+
+import tooth.exception.InvalidFileFormatException;
+import tooth.task.Deadline;
+import tooth.task.Event;
+import tooth.task.Task;
+import tooth.task.ToDo;
+
 import java.time.LocalDate;
 
 public class FileR {

@@ -1,4 +1,4 @@
-import javax.sound.midi.SysexMessage;
+package tooth.stuff;
 
 public class UI {
 
@@ -15,7 +15,7 @@ public class UI {
 
     public void welcome() {
         System.out.println(logo);
-        System.out.println("Welcome to tooth.stuff.Tooth");
+        System.out.println("Welcome to Tooth");
         line();
     }
 

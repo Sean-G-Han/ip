@@ -1,3 +1,8 @@
+package tooth.command;
+
+import tooth.stuff.*;
+import tooth.task.*;
+
 public class TodoCommand implements Command {
 
     public String s;

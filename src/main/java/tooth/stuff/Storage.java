@@ -1,3 +1,9 @@
+package tooth.stuff;
+
+import tooth.command.FileR;
+import tooth.exception.InvalidFileFormatException;
+import tooth.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

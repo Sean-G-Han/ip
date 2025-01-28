@@ -1,3 +1,7 @@
+package tooth.command;
+import tooth.stuff.*;
+import tooth.task.*;
+
 import java.time.LocalDate;
 
 public class DeadlineCommand implements Command {

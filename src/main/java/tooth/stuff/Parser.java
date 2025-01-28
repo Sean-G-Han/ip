@@ -1,6 +1,11 @@
+package tooth.stuff;
+
+import tooth.command.*;
+import tooth.exception.InvalidCommandException;
+import tooth.exception.InvalidParamException;
+
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Parser {
 
@@ -50,7 +55,7 @@ public class Parser {
                 int fromIndex = s.indexOf("/from");
                 int toIndex = s.indexOf("/to");
                 if (s.isEmpty()) {
-                    throw new InvalidParamException("Event requires a description");
+                    throw new InvalidParamException("tooth.task.Event requires a description");
                 } else if (fromIndex == -1 || toIndex == -1) {
                     throw new InvalidParamException("Missing either /to or /from field");
                 } else if (fromIndex == 0) {
@@ -64,7 +69,7 @@ public class Parser {
             case "deadline":
                 int byIndex = s.indexOf("/by");
                 if (s.isEmpty()) {
-                    throw new InvalidParamException("Deadline requires a description");
+                    throw new InvalidParamException("tooth.task.Deadline requires a description");
                 } else if (byIndex == -1) {
                     throw new InvalidParamException("Missing either /to or /from field");
                 } else if (byIndex == 0) {
@@ -90,7 +95,7 @@ public class Parser {
                 return new LoadCommand();
 
             default:
-                throw new InvalidCommandException("Command " + command + " does not exist");
+                throw new InvalidCommandException("tooth.command.Command " + command + " does not exist");
         }
     }
 }

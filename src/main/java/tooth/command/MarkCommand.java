@@ -1,3 +1,7 @@
+package tooth.command;
+
+import tooth.stuff.*;
+
 public class MarkCommand implements Command {
 
     int index;
@@ -7,7 +11,7 @@ public class MarkCommand implements Command {
     }
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.say("Marking Task: " + index);
+        ui.say("Marking tooth.task.Task: " + index);
         tasks.mark(index);
     }
 }

@@ -1,3 +1,8 @@
+package tooth.stuff;
+
+import tooth.exception.InvalidParamException;
+import tooth.task.Task;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 

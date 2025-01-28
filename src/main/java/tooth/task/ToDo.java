@@ -1,3 +1,5 @@
+package tooth.task;
+
 public class ToDo extends Task {
     private ToDo(String name, boolean done){
         super(name, done);

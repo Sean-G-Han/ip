@@ -1,3 +1,7 @@
+package tooth.command;
+
+import tooth.stuff.*;
+
 public class DeleteCommand implements Command {
 
     public int index;
@@ -8,6 +12,6 @@ public class DeleteCommand implements Command {
 
     public void execute(TaskList tasks, UI ui, Storage storage) {
         tasks.delete(index);
-        ui.say("Deleted Task: " + index);
+        ui.say("Deleted tooth.task.Task: " + index);
     }
 }

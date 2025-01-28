@@ -1,3 +1,7 @@
+package tooth.command;
+
+import tooth.stuff.*;
+
 public class LoadCommand implements Command {
 
     public LoadCommand() {};

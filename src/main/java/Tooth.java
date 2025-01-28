@@ -1,8 +1,10 @@
-package tooth.stuff;
-
 import tooth.command.ByeCommand;
 import tooth.command.Command;
 import tooth.exception.ToothException;
+import tooth.stuff.Parser;
+import tooth.stuff.Storage;
+import tooth.stuff.TaskList;
+import tooth.stuff.UI;
 
 import java.util.Scanner;
 

@@ -1,3 +1,7 @@
+package tooth.command;
+
+import tooth.stuff.*;
+
 public class ListCommand implements Command {
     int index = 0;
 
