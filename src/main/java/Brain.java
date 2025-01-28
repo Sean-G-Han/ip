@@ -2,8 +2,6 @@ import java.time.LocalDate;
 
 public class Brain {
 
-    public static TaskList memory = new TaskList();
-
     public static Task create(String serializedString) throws InvalidFileFormatException {
         String[] parts = serializedString.split("\\|");
         if (parts[0].equals("T")) {
@@ -31,11 +29,11 @@ public class Brain {
         throw new InvalidFileFormatException("Header is wrong");
     }
 
-    public static void list() throws MemoryIsEmptyException {
+    public static void list(TaskList memory) throws MemoryIsEmptyException {
         memory.forEach(System.out::println);
     }
 
-    public static void todo(String s) throws InvalidParamException {
+    public static void todo(String s, TaskList memory) throws InvalidParamException {
         if (s.isEmpty()) {
             throw new InvalidParamException("Todo requires a description");
         } else {
@@ -44,7 +42,7 @@ public class Brain {
         }
     }
 
-    public static void event(String s) throws InvalidParamException {
+    public static void event(String s, TaskList memory) throws InvalidParamException {
         int fromIndex = s.indexOf("/from");
         int toIndex = s.indexOf("/to");
         if (s.isEmpty()) {
@@ -62,7 +60,7 @@ public class Brain {
         }
     }
 
-    public static void deadline(String s) {
+    public static void deadline(String s, TaskList memory) {
         int byIndex = s.indexOf("/by");
         if (s.isEmpty()) {
             throw new InvalidParamException("Event requires a description");
@@ -75,10 +73,10 @@ public class Brain {
             String item = s.substring(0, byIndex).trim();
             Deadline deadline = Deadline.of(item, by);
             memory.add(deadline);
-        }
-    }
+        }    }
 
-    public static void processing() {
-        Parser.process();
+    public static void processing(Storage storage, TaskList tasks, UI ui) {
+        Parser parser = new Parser(storage, tasks, ui);
+        parser.process();
     }
 }

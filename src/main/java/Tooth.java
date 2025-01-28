@@ -1,9 +1,13 @@
 import java.io.IOException;
 
 public class Tooth {
+
     public static void main(String[] args) {
-        UI.welcome();
-        Brain.processing();
-        UI.bye();
+        Storage storage = new Storage();
+        TaskList tasks = new TaskList();
+        UI ui = new UI();
+        ui.welcome();
+        Brain.processing(storage, tasks, ui);
+        ui.bye();
     }
 }

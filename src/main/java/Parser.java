@@ -2,7 +2,18 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Parser {
-    public static void process() {
+
+    Storage storage;
+    TaskList memory;
+    UI ui;
+
+    public Parser(Storage storage, TaskList tasks, UI ui) {
+        this.storage = storage;
+        this.memory = tasks;
+        this.ui = ui;
+    }
+
+    public void process() {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
         while (!exit) {
@@ -15,11 +26,10 @@ public class Parser {
         }
     }
 
-    public static boolean parse(String input) throws InvalidParamException {
+    public boolean parse(String input) throws InvalidParamException {
         if (input.indexOf('|') > -1)
             throw new InvalidCommandException("Character [|] is not allowed");
 
-        TaskList memory = Brain.memory;
         String[] pieces = input.split(" ");
         String command = pieces[0];
         String s = String.join(" ", Arrays.copyOfRange(pieces, 1, pieces.length));
@@ -29,51 +39,51 @@ public class Parser {
                 return true;
 
             case "list":
-                UI.say("Here is the list of Task");
-                Brain.list();
+                Brain.list(memory);
+                ui.say("Here is the list of Task");
                 break;
 
             case "mark":
                 int markIndex = Integer.parseInt(s);
-                UI.say("Marked task" + markIndex);
                 memory.mark(markIndex);
+                ui.say("Marked task" + markIndex);
                 break;
 
             case "unmark":
                 int unmarkIndex = Integer.parseInt(s);
-                UI.say("Unmarked task" + unmarkIndex);
                 memory.unmark(unmarkIndex);
+                ui.say("Unmarked task" + unmarkIndex);
                 break;
 
             case "todo":
-                UI.say("Adding Task [todo: " + s + "]");
-                Brain.todo(s);
+                Brain.todo(s, memory);
+                ui.say("Adding Task [todo: " + s + "]");
                 break;
 
             case "event":
-                UI.say("Adding Task [event: " + s + "]");
-                Brain.event(s);
+                Brain.event(s, memory);
+                ui.say("Adding Task [event: " + s + "]");
                 break;
 
             case "deadline":
-                UI.say("Adding Task [deadline: " + s + "]");
-                Brain.deadline(s);
+                Brain.deadline(s, memory);
+                ui.say("Adding Task [deadline: " + s + "]");
                 break;
 
             case "delete":
                 int deleteIndex = Integer.parseInt(s);
-                UI.say("Deleting" + deleteIndex);
+                ui.say("Deleting" + deleteIndex);
                 memory.delete(deleteIndex);
                 break;
 
             case "save":
-                Storage.save(memory);
-                UI.say("Data Saved");
+                storage.save(memory);
+                ui.say("Data Saved");
                 break;
 
             case "load":
-                Storage.load(memory);
-                UI.say("Data Loaded");
+                storage.load(memory);
+                ui.say("Data Loaded");
                 break;
 
             default:

@@ -2,11 +2,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    public static void save(TaskList memory) {
+
+    public Storage() {};
+
+    public void save(TaskList memory) {
         try {
             File f = new File("src/main/save.txt");
             FileWriter fw = new FileWriter(f);
@@ -26,7 +28,7 @@ public class Storage {
         }
     }
 
-    public static void load(TaskList memory) {
+    public void load(TaskList memory) {
         try {
             memory.clear();
             File f = new File("src/main/save.txt");

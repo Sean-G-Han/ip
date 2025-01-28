@@ -3,8 +3,9 @@ import java.util.function.Consumer;
 
 public class TaskList {
 
-
     private final ArrayList<Task> memory = new ArrayList<>();
+
+    public TaskList(){};
 
     public void add(Task item) {
         memory.add(item);

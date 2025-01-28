@@ -1,7 +1,10 @@
 import javax.sound.midi.SysexMessage;
 
 public class UI {
-    private static final String logo = """
+
+    public UI() {};
+
+    private final String logo = """
      _______          _   _    \s
     |__   __|        | | | |   \s
        | | ___   ___ | |_| |__ \s
@@ -10,17 +13,17 @@ public class UI {
        |_|\\___/ \\___/ \\__|_| |_|
     """;
 
-    public static void welcome() {
+    public void welcome() {
         System.out.println(logo);
         System.out.println("Welcome to Tooth");
     }
 
-    public static void bye() {
+    public void bye() {
         System.out.println("Ok Bye");
         System.out.println(logo);
     }
 
-    public static void say(String sentence) {
+    public void say(String sentence) {
         System.out.println("""
                  ∧,,,,∧
                 ( -O·O-)
