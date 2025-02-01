@@ -21,6 +21,8 @@ public class Parser {
 
         switch (command) {
             case "bye":
+                if (pieces.length != 1)
+                    throw new InvalidParamException("List does not have any description");
                 return new ByeCommand();
             case "list":
                 if (pieces.length != 1)
@@ -33,7 +35,7 @@ public class Parser {
                 try {
                     return new MarkCommand(Integer.parseInt(s));
                 } catch (RuntimeException e) {
-                    throw new InvalidParamException(e.getMessage());
+                    throw new InvalidParamException("Mark expects a Integer as an exception");
                 }
 
             case "unmark":
@@ -42,7 +44,7 @@ public class Parser {
                 try {
                     return new UnmarkCommand(Integer.parseInt(s));
                 } catch (RuntimeException e) {
-                    throw new InvalidParamException(e.getMessage());
+                    throw new InvalidParamException("Unmark expects a Integer as an exception");
                 }
 
             case "todo":
@@ -55,7 +57,7 @@ public class Parser {
                 int fromIndex = s.indexOf("/from");
                 int toIndex = s.indexOf("/to");
                 if (s.isEmpty()) {
-                    throw new InvalidParamException("tooth.task.Event requires a description");
+                    throw new InvalidParamException("Event requires a description");
                 } else if (fromIndex == -1 || toIndex == -1) {
                     throw new InvalidParamException("Missing either /to or /from field");
                 } else if (fromIndex == 0) {
@@ -69,9 +71,9 @@ public class Parser {
             case "deadline":
                 int byIndex = s.indexOf("/by");
                 if (s.isEmpty()) {
-                    throw new InvalidParamException("tooth.task.Deadline requires a description");
+                    throw new InvalidParamException("Deadline requires a description");
                 } else if (byIndex == -1) {
-                    throw new InvalidParamException("Missing either /to or /from field");
+                    throw new InvalidParamException("Missing /by field");
                 } else if (byIndex == 0) {
                     throw new InvalidParamException("Missing the title");
                 }
@@ -85,13 +87,17 @@ public class Parser {
                 try {
                     return new DeleteCommand(Integer.parseInt(s));
                 } catch (RuntimeException e) {
-                    throw new InvalidParamException(e.getMessage());
+                    throw new InvalidParamException("Delete expects a Integer as an exception");
                 }
 
             case "save":
+                if (pieces.length != 1)
+                    throw new InvalidParamException("List does not have any description");
                 return new SaveCommand();
 
             case "load":
+                if (pieces.length != 1)
+                    throw new InvalidParamException("List does not have any description");
                 return new LoadCommand();
 
             default:
