@@ -90,6 +90,12 @@ public class Parser {
                     throw new InvalidParamException("Delete expects a Integer as an exception");
                 }
 
+            case "find":
+                if (s.isEmpty()) {
+                    throw new InvalidParamException("Find needs a string to search for");
+                }
+                return new FindCommand(s);
+
             case "save":
                 if (pieces.length != 1)
                     throw new InvalidParamException("List does not have any description");
