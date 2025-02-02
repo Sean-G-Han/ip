@@ -7,10 +7,20 @@ import tooth.exception.InvalidParamException;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+/**
+ * Converts String to executable commands
+ */
 public class Parser {
 
     public Parser() {};
 
+    /**
+     * Parse String to convert it to a command
+     *
+     * @param input String input to be converted to Commands
+     * @return Command that can then be executed
+     * @throws InvalidParamException Error containing mistakes in input string
+     */
     public Command parse(String input) throws InvalidParamException {
         if (input.indexOf('|') > -1)
             throw new InvalidCommandException("Character [|] is not allowed");
@@ -21,17 +31,20 @@ public class Parser {
 
         switch (command) {
             case "bye":
-                if (pieces.length != 1)
+                if (pieces.length != 1) {
                     throw new InvalidParamException("List does not have any description");
+                }
                 return new ByeCommand();
             case "list":
-                if (pieces.length != 1)
+                if (pieces.length != 1) {
                     throw new InvalidParamException("List does not have any description");
+                }
                 return new ListCommand();
 
             case "mark":
-                if (pieces.length != 2)
+                if (pieces.length != 2) {
                     throw new InvalidParamException("Mark only requires 1 parameter (Index)");
+                }
                 try {
                     return new MarkCommand(Integer.parseInt(s));
                 } catch (RuntimeException e) {
@@ -39,8 +52,9 @@ public class Parser {
                 }
 
             case "unmark":
-                if (pieces.length != 2)
+                if (pieces.length != 2) {
                     throw new InvalidParamException("Unmark only requires 1 parameter (Index)");
+                }
                 try {
                     return new UnmarkCommand(Integer.parseInt(s));
                 } catch (RuntimeException e) {
@@ -82,8 +96,9 @@ public class Parser {
                 return new DeadlineCommand(dealineString, by);
 
             case "delete":
-                if (pieces.length != 2)
+                if (pieces.length != 2) {
                     throw new InvalidParamException("Delete only requires 1 parameter (Index)");
+                }
                 try {
                     return new DeleteCommand(Integer.parseInt(s));
                 } catch (RuntimeException e) {
@@ -91,13 +106,15 @@ public class Parser {
                 }
 
             case "save":
-                if (pieces.length != 1)
+                if (pieces.length != 1) {
                     throw new InvalidParamException("List does not have any description");
+                }
                 return new SaveCommand();
 
             case "load":
-                if (pieces.length != 1)
+                if (pieces.length != 1) {
                     throw new InvalidParamException("List does not have any description");
+                }
                 return new LoadCommand();
 
             default:

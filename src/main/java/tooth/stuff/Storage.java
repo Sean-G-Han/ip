@@ -10,10 +10,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ *  Stores and loads data into a save.txt
+ */
 public class Storage {
 
     public Storage() {};
 
+    /**
+     * Save data into save.txt
+     *
+     * @param memory the tasklist containing all the tasks
+     */
     public void save(TaskList memory) {
         try {
             File f = new File("src/main/save.txt");
@@ -32,6 +40,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load data from save.txt
+     *
+     * @param memory the tasklist containing all the tasks
+     */
     public void load(TaskList memory) {
         try {
             memory.clear();
