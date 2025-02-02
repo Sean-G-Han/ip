@@ -21,17 +21,20 @@ public class Parser {
 
         switch (command) {
             case "bye":
-                if (pieces.length != 1)
+                if (pieces.length != 1) {
                     throw new InvalidParamException("List does not have any description");
+                }
                 return new ByeCommand();
             case "list":
-                if (pieces.length != 1)
+                if (pieces.length != 1) {
                     throw new InvalidParamException("List does not have any description");
+                }
                 return new ListCommand();
 
             case "mark":
-                if (pieces.length != 2)
+                if (pieces.length != 2) {
                     throw new InvalidParamException("Mark only requires 1 parameter (Index)");
+                }
                 try {
                     return new MarkCommand(Integer.parseInt(s));
                 } catch (RuntimeException e) {
@@ -39,8 +42,9 @@ public class Parser {
                 }
 
             case "unmark":
-                if (pieces.length != 2)
+                if (pieces.length != 2) {
                     throw new InvalidParamException("Unmark only requires 1 parameter (Index)");
+                }
                 try {
                     return new UnmarkCommand(Integer.parseInt(s));
                 } catch (RuntimeException e) {
@@ -91,13 +95,15 @@ public class Parser {
                 }
 
             case "save":
-                if (pieces.length != 1)
+                if (pieces.length != 1) {
                     throw new InvalidParamException("List does not have any description");
+                }
                 return new SaveCommand();
 
             case "load":
-                if (pieces.length != 1)
+                if (pieces.length != 1) {
                     throw new InvalidParamException("List does not have any description");
+                }
                 return new LoadCommand();
 
             default:
