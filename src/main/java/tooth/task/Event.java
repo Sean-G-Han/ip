@@ -2,9 +2,14 @@ package tooth.task;
 
 import java.time.LocalDate;
 
+/**
+ * Event Task Object
+ */
 public class Event extends Task {
-    LocalDate from, to;
-    private Event(String name, boolean done, LocalDate from, LocalDate to){
+    private LocalDate from;
+    private LocalDate to;
+
+    private Event(String name, boolean done, LocalDate from, LocalDate to) {
         super(name, done);
         this.from = from;
         this.to = to;
@@ -30,7 +35,7 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        return "E|" + name + "|" + to + "|" + from  + "|" + done;
+        return "E|" + name + "|" + to + "|" + from + "|" + done;
     }
 
     @Override

@@ -1,15 +1,23 @@
 package tooth.command;
 
-import tooth.stuff.*;
+import tooth.stuff.Storage;
+import tooth.stuff.TaskList;
+import tooth.stuff.UI;
 
+/**
+ * Command that marks task as incomplete in TaskList
+ */
 public class UnmarkCommand implements Command {
 
-    int index;
+    private int index;
 
     public UnmarkCommand(int index) {
         this.index = index;
     }
 
+    /**
+     * Execute task
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         ui.say("Unmarking tooth.task.Task: " + index);
         tasks.unmark(index);

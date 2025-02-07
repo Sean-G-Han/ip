@@ -1,15 +1,24 @@
 package tooth.command;
-import tooth.stuff.*;
+
+import tooth.stuff.Storage;
+import tooth.stuff.TaskList;
+import tooth.stuff.UI;
 import tooth.task.Task;
 
+/**
+ * Command that list all task with match strings
+ */
 public class FindCommand implements Command {
 
-    String s;
+    private String s;
 
     public FindCommand(String s) {
         this.s = s;
-    };
+    }
 
+    /**
+     * Execute task
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         ui.say("Here is what I found:");
         tasks.forEach((x) -> {

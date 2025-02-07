@@ -1,5 +1,8 @@
 package tooth.task;
 
+/**
+ * Abstract Task Object
+ */
 public abstract class Task {
     protected String name;
     protected boolean done;
@@ -13,7 +16,7 @@ public abstract class Task {
 
     public abstract Task incomplete();
 
-    public  abstract String serialize();
+    public abstract String serialize();
 
     @Override
     public String toString() {

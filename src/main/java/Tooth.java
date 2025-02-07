@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import tooth.command.ByeCommand;
 import tooth.command.Command;
 import tooth.exception.ToothException;
@@ -6,8 +8,9 @@ import tooth.stuff.Storage;
 import tooth.stuff.TaskList;
 import tooth.stuff.UI;
 
-import java.util.Scanner;
-
+/**
+ * Tooth main class
+ */
 public class Tooth {
 
     public static void main(String[] args) {
@@ -22,8 +25,9 @@ public class Tooth {
                 String input = scanner.nextLine();
                 Command c = parser.parse(input);
                 c.execute(tasks, ui, storage);
-                if (c instanceof ByeCommand)
+                if (c instanceof ByeCommand) {
                     break;
+                }
             } catch (ToothException e) {
                 ui.complain(e.getMessage());
             }

@@ -1,16 +1,24 @@
 package tooth.command;
 
-import tooth.stuff.*;
-import tooth.task.*;
+import tooth.stuff.Storage;
+import tooth.stuff.TaskList;
+import tooth.stuff.UI;
+import tooth.task.ToDo;
 
+/**
+ * Command that creates a todo task
+ */
 public class TodoCommand implements Command {
 
-    public String s;
+    private String s;
 
     public TodoCommand(String s) {
         this.s = s;
     }
 
+    /**
+     * Execute task
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         ToDo todo = ToDo.of(s);
         tasks.add(todo);

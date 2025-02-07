@@ -1,17 +1,28 @@
 package tooth.stuff;
 
-import org.junit.jupiter.api.Test;
-import tooth.command.*;
-import tooth.exception.InvalidParamException;
-import tooth.task.Event;
-
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import tooth.command.ByeCommand;
+import tooth.command.Command;
+import tooth.command.DeadlineCommand;
+import tooth.command.DeleteCommand;
+import tooth.command.EventCommand;
+import tooth.command.ListCommand;
+import tooth.command.LoadCommand;
+import tooth.command.MarkCommand;
+import tooth.command.SaveCommand;
+import tooth.command.TodoCommand;
+import tooth.command.UnmarkCommand;
+import tooth.exception.InvalidParamException;
+
+
 
 public class ParserTest {
     @Test
-    public void byeTest(){
+    public void byeTest() {
         Parser p = new Parser();
         Command c = p.parse("bye");
         assertInstanceOf(ByeCommand.class, c);
@@ -19,7 +30,7 @@ public class ParserTest {
     }
 
     @Test
-    public void listTest(){
+    public void listTest() {
         Parser p = new Parser();
         Command c = p.parse("list");
         assertInstanceOf(ListCommand.class, c);
@@ -27,7 +38,7 @@ public class ParserTest {
     }
 
     @Test
-    public void markTest(){
+    public void markTest() {
         Parser p = new Parser();
         Command c = p.parse("mark 1");
         assertInstanceOf(MarkCommand.class, c);
@@ -36,7 +47,7 @@ public class ParserTest {
     }
 
     @Test
-    public void unmarkTest(){
+    public void unmarkTest() {
         Parser p = new Parser();
         Command c = p.parse("unmark 1");
         assertInstanceOf(UnmarkCommand.class, c);
@@ -45,7 +56,7 @@ public class ParserTest {
     }
 
     @Test
-    public void todoTest(){
+    public void todoTest() {
         Parser p = new Parser();
         Command c = p.parse("todo abc");
         assertInstanceOf(TodoCommand.class, c);
@@ -53,7 +64,7 @@ public class ParserTest {
     }
 
     @Test
-    public void eventTest(){
+    public void eventTest() {
         Parser p = new Parser();
         Command c = p.parse("event abc /from 2000-01-01 /to 2000-01-01");
         assertInstanceOf(EventCommand.class, c);
@@ -62,7 +73,7 @@ public class ParserTest {
     }
 
     @Test
-    public void deadlineTest(){
+    public void deadlineTest() {
         Parser p = new Parser();
         Command c = p.parse("deadline abc /by 2000-01-01");
         assertInstanceOf(DeadlineCommand.class, c);
@@ -71,7 +82,7 @@ public class ParserTest {
     }
 
     @Test
-    public void deleteTest(){
+    public void deleteTest() {
         Parser p = new Parser();
         Command c = p.parse("delete 1");
         assertInstanceOf(DeleteCommand.class, c);
@@ -80,7 +91,7 @@ public class ParserTest {
     }
 
     @Test
-    public void saveTest(){
+    public void saveTest() {
         Parser p = new Parser();
         Command c = p.parse("save");
         assertInstanceOf(SaveCommand.class, c);
@@ -88,7 +99,7 @@ public class ParserTest {
     }
 
     @Test
-    public void loadTest(){
+    public void loadTest() {
         Parser p = new Parser();
         Command c = p.parse("load");
         assertInstanceOf(LoadCommand.class, c);

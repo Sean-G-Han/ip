@@ -2,8 +2,11 @@ package tooth.task;
 
 import java.time.LocalDate;
 
+/**
+ * Deadline Task Object
+ */
 public class Deadline extends Task {
-    LocalDate deadline;
+    private LocalDate deadline;
     private Deadline(String name, boolean done, LocalDate deadline) {
         super(name, done);
         this.deadline = deadline;
@@ -29,7 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        return "D|" + name + "|" + deadline  + "|" + done;
+        return "D|" + name + "|" + deadline + "|" + done;
     }
 
     @Override

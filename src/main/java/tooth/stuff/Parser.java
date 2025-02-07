@@ -1,11 +1,22 @@
 package tooth.stuff;
 
-import tooth.command.*;
-import tooth.exception.InvalidCommandException;
-import tooth.exception.InvalidParamException;
-
 import java.time.LocalDate;
 import java.util.Arrays;
+
+import tooth.command.ByeCommand;
+import tooth.command.Command;
+import tooth.command.DeadlineCommand;
+import tooth.command.DeleteCommand;
+import tooth.command.EventCommand;
+import tooth.command.FindCommand;
+import tooth.command.ListCommand;
+import tooth.command.LoadCommand;
+import tooth.command.MarkCommand;
+import tooth.command.SaveCommand;
+import tooth.command.TodoCommand;
+import tooth.command.UnmarkCommand;
+import tooth.exception.InvalidCommandException;
+import tooth.exception.InvalidParamException;
 
 /**
  * Converts String to executable commands
@@ -15,8 +26,6 @@ public class Parser {
     public Parser() {
     }
 
-    ;
-
     /**
      * Parse String to convert it to a command
      *
@@ -25,9 +34,9 @@ public class Parser {
      * @throws InvalidParamException Error containing mistakes in input string
      */
     public Command parse(String input) throws InvalidParamException {
-        if (input.indexOf('|') > -1)
+        if (input.indexOf('|') > -1) {
             throw new InvalidCommandException("Character [|] is not allowed");
-
+        }
         String[] pieces = input.split(" ");
         String command = pieces[0];
         String s = String.join(" ", Arrays.copyOfRange(pieces, 1, pieces.length));

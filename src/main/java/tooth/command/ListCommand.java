@@ -1,12 +1,20 @@
 package tooth.command;
 
-import tooth.stuff.*;
+import tooth.stuff.Storage;
+import tooth.stuff.TaskList;
+import tooth.stuff.UI;
 
+/**
+ * Command that list all tasks in TaskList
+ */
 public class ListCommand implements Command {
-    int index = 0;
+    private int index = 0;
 
-    public ListCommand() {};
+    public ListCommand() {}
 
+    /**
+     * Execute tasks
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         ui.say("List:");
         tasks.forEach((t) -> {

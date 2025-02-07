@@ -1,14 +1,14 @@
 package tooth.stuff;
 
-import tooth.command.FileR;
-import tooth.exception.InvalidFileFormatException;
-import tooth.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import tooth.command.FileR;
+import tooth.exception.InvalidFileFormatException;
+import tooth.task.Task;
 
 /**
  *  Stores and loads data into a save.txt
@@ -59,7 +59,8 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new InvalidFileFormatException("Warning: [save.txt] not found. If this is the first time booting the app, please ignore.");
+            throw new InvalidFileFormatException("Warning: [save.txt] not found. If this is the first time"
+                    + "booting the app, please ignore.");
         }
     }
 }

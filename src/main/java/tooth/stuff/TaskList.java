@@ -1,19 +1,19 @@
 package tooth.stuff;
 
-import tooth.exception.InvalidParamException;
-import tooth.task.Task;
-
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
+import tooth.exception.InvalidParamException;
+import tooth.task.Task;
+
 /**
- *The list storing all the main tasks
+ * The list storing all the main tasks
  */
 public class TaskList {
 
     private final ArrayList<Task> memory = new ArrayList<>();
 
-    public TaskList(){};
+    public TaskList() {}
 
     /**
      * Adds a task to the list
@@ -51,7 +51,7 @@ public class TaskList {
      * @param i the index of the task to mark
      * @throws InvalidParamException thrown if the index specified does not exist
      */
-    public void mark(int i) throws InvalidParamException{
+    public void mark(int i) throws InvalidParamException {
         if (i > memory.size() - 1) {
             throw new InvalidParamException("Index " + i + " is out of range");
         } else {

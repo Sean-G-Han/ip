@@ -1,7 +1,10 @@
 package tooth.task;
 
+/**
+ * Todo Task Object
+ */
 public class ToDo extends Task {
-    private ToDo(String name, boolean done){
+    private ToDo(String name, boolean done) {
         super(name, done);
     }
 
