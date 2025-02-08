@@ -10,6 +10,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
+    private Tooth tooth = new Tooth();
 
     @Override
     public void start(Stage stage) {
@@ -19,6 +20,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setMinHeight(220);
             stage.setMinWidth(417);
+            fxmlLoader.<MainWindow>getController().setTooth(tooth);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

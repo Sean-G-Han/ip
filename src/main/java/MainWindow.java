@@ -18,6 +18,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    private Tooth tooth;
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -25,12 +27,17 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
+    /** Injects the Duke instance */
+    public void setTooth(Tooth tooth) {
+        this.tooth = tooth;
+    }
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        String response = this.tooth.respondToUser(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(input, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }

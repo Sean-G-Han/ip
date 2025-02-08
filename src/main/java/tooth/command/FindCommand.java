@@ -23,7 +23,7 @@ public class FindCommand implements Command {
         ui.say("Here is what I found:");
         tasks.forEach((x) -> {
             if (canFind(x)) {
-                System.out.println(x);
+                ui.appendLn(x.toString());
             }
         });
     }

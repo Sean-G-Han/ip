@@ -16,9 +16,9 @@ public class ListCommand implements Command {
      * Execute tasks
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.say("List:");
-        tasks.forEach((t) -> {
-            System.out.println(index + " " + t.toString());
+        ui.say("List: ");
+        tasks.forEach((x) -> {
+            ui.appendLn(index + " " + x.toString());
             index++;
         });
     }

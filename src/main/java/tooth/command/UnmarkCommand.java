@@ -19,7 +19,7 @@ public class UnmarkCommand implements Command {
      * Execute task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.say("Unmarking tooth.task.Task: " + index);
+        ui.say("Unmarking task: " + index);
         tasks.unmark(index);
     }
 }

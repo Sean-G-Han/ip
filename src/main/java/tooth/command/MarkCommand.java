@@ -19,7 +19,7 @@ public class MarkCommand implements Command {
      * Execute task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.say("Marking tooth.task.Task: " + index);
+        ui.say("Marking task: " + index);
         tasks.mark(index);
     }
 }
