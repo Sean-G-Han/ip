@@ -19,6 +19,7 @@ public class UnmarkCommand implements Command {
      * Execute task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
+        assert index >= 0;
         ui.say("Unmarking task: " + index);
         tasks.unmark(index);
     }
