@@ -20,8 +20,10 @@ public class TodoCommand implements Command {
      * Execute task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
+        int prevNumTask = tasks.numTask();
         ToDo todo = ToDo.of(s);
         tasks.add(todo);
         ui.say("Added new todo");
+        assert prevNumTask < tasks.numTask();
     }
 }
