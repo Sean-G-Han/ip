@@ -19,6 +19,7 @@ public class MarkCommand implements Command {
      * Execute task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
+        assert index >= 0;
         ui.say("Marking task: " + index);
         tasks.mark(index);
     }

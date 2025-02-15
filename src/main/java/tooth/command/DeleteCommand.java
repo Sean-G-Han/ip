@@ -22,6 +22,7 @@ public class DeleteCommand implements Command {
      * Executes task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
+        assert index >= 0;
         tasks.delete(index);
         ui.say("Deleted tasks: " + index);
     }

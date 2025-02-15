@@ -30,8 +30,10 @@ public class EventCommand implements Command {
      * Execute Task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
+        int prevNumTask = tasks.numTask();
         Event event = Event.of(s, from, to);
         tasks.add(event);
         ui.say("Added new event");
+        assert prevNumTask < tasks.numTask();
     }
 }
