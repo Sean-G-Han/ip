@@ -28,7 +28,7 @@ public class DeadlineCommand implements Command {
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
         int prevNumTask = tasks.numTask();
-        Deadline deadline = Deadline.of(s, by);
+        Deadline deadline = Deadline.of(description, by);
         tasks.add(deadline);
         ui.say("Added new deadline");
         assert prevNumTask < tasks.numTask();
