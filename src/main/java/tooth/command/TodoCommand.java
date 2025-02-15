@@ -10,17 +10,17 @@ import tooth.task.ToDo;
  */
 public class TodoCommand implements Command {
 
-    private String s;
+    private String description;
 
-    public TodoCommand(String s) {
-        this.s = s;
+    public TodoCommand(String description) {
+        this.description = description;
     }
 
     /**
      * Execute task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        ToDo todo = ToDo.of(s);
+        ToDo todo = ToDo.of(description);
         tasks.add(todo);
         ui.say("Added new todo");
     }

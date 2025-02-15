@@ -12,16 +12,16 @@ import tooth.task.Event;
  */
 public class EventCommand implements Command {
 
-    private String s;
+    private String description;
     private LocalDate from;
     private LocalDate to;
 
     /**
      * Constructor of EventCommand
-     * @param s the description of the Event
+     * @param description the description of the Event
      */
-    public EventCommand(String s, LocalDate from, LocalDate to) {
-        this.s = s;
+    public EventCommand(String description, LocalDate from, LocalDate to) {
+        this.description = description;
         this.from = from;
         this.to = to;
     }
@@ -30,7 +30,7 @@ public class EventCommand implements Command {
      * Execute Task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        Event event = Event.of(s, from, to);
+        Event event = Event.of(description, from, to);
         tasks.add(event);
         ui.say("Added new event");
     }

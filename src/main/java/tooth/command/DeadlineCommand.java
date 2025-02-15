@@ -11,15 +11,15 @@ import tooth.task.Deadline;
  * Command that creates a new deadline
  */
 public class DeadlineCommand implements Command {
-    private String s;
+    private String description;
     private LocalDate by;
 
     /**
      * Constructor of DeadlineCommand
-     * @param s the description of the Deadline
+     * @param description the description of the Deadline
      */
-    public DeadlineCommand(String s, LocalDate by) {
-        this.s = s;
+    public DeadlineCommand(String description, LocalDate by) {
+        this.description = description;
         this.by = by;
     }
 
@@ -27,7 +27,7 @@ public class DeadlineCommand implements Command {
      * Executes task
      */
     public void execute(TaskList tasks, UI ui, Storage storage) {
-        Deadline deadline = Deadline.of(s, by);
+        Deadline deadline = Deadline.of(description, by);
         tasks.add(deadline);
         ui.say("Added new deadline");
     }
