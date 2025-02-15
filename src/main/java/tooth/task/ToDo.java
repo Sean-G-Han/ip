@@ -4,16 +4,16 @@ package tooth.task;
  * Todo Task Object
  */
 public class ToDo extends Task {
-    private ToDo(String name, boolean done) {
-        super(name, done);
+    private ToDo(String name, boolean isDone) {
+        super(name, isDone);
     }
 
     public static ToDo of(String name) {
         return new ToDo(name, false);
     }
 
-    public static ToDo of(String name, boolean done) {
-        return new ToDo(name, done);
+    public static ToDo of(String name, boolean isDone) {
+        return new ToDo(name, isDone);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ToDo extends Task {
 
     @Override
     public String serialize() {
-        return "T|" + name + "|" + done;
+        return "T|" + name + "|" + isDone;
     }
 
     @Override

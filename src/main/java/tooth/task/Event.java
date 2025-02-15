@@ -9,8 +9,8 @@ public class Event extends Task {
     private LocalDate from;
     private LocalDate to;
 
-    private Event(String name, boolean done, LocalDate from, LocalDate to) {
-        super(name, done);
+    private Event(String name, boolean isDone, LocalDate from, LocalDate to) {
+        super(name, isDone);
         this.from = from;
         this.to = to;
     }
@@ -19,8 +19,8 @@ public class Event extends Task {
         return new Event(name, false, from, to);
     }
 
-    public static Event of(String name, boolean done, LocalDate from, LocalDate to) {
-        return new Event(name, done, from, to);
+    public static Event of(String name, boolean isDone, LocalDate from, LocalDate to) {
+        return new Event(name, isDone, from, to);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        return "E|" + name + "|" + to + "|" + from + "|" + done;
+        return "E|" + name + "|" + to + "|" + from + "|" + isDone;
     }
 
     @Override

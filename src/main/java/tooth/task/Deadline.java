@@ -7,8 +7,8 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
     private LocalDate deadline;
-    private Deadline(String name, boolean done, LocalDate deadline) {
-        super(name, done);
+    private Deadline(String name, boolean isDone, LocalDate deadline) {
+        super(name, isDone);
         this.deadline = deadline;
     }
 
@@ -16,8 +16,8 @@ public class Deadline extends Task {
         return new Deadline(name, false, deadline);
     }
 
-    public static Deadline of(String name, boolean done, LocalDate deadline) {
-        return new Deadline(name, done, deadline);
+    public static Deadline of(String name, boolean isDone, LocalDate deadline) {
+        return new Deadline(name, isDone, deadline);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        return "D|" + name + "|" + deadline + "|" + done;
+        return "D|" + name + "|" + deadline + "|" + isDone;
     }
 
     @Override

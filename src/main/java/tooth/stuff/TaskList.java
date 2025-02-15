@@ -83,4 +83,11 @@ public class TaskList {
     public void forEach(Consumer<? super Task> action) {
         memory.forEach(action);
     }
+
+    /**
+     * Counts number of tasks
+     */
+    public int numTask() {
+        return memory.size();
+    }
 }

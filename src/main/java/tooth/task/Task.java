@@ -5,11 +5,11 @@ package tooth.task;
  */
 public abstract class Task {
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
 
     protected Task(String name, boolean done) {
         this.name = name;
-        this.done = done;
+        this.isDone = done;
     }
 
     public abstract Task complete();
@@ -20,6 +20,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return (done ? "[X] " : "[ ] ") + name;
+        return (isDone ? "[X] " : "[ ] ") + name;
     }
 }
