@@ -1,7 +1,6 @@
 package tooth.stuff;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -24,19 +23,27 @@ public class Storage {
      */
     public void save(TaskList memory) {
         try {
-            File f = new File("src/main/save.txt");
-            FileWriter fw = new FileWriter(f);
-            memory.forEach((t) -> {
-                try {
-                    fw.append(t.serialize());
-                    fw.append("\n");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            fw.close();
+            File dir = new File("data");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            File f = new File(dir, "save.txt");
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+
+            try (FileWriter fw = new FileWriter(f)) {
+                memory.forEach((t) -> {
+                    try {
+                        fw.append(t.serialize()).append("\n");
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
         } catch (IOException e) {
-            throw new InvalidFileFormatException("Error : File is a directory not a file");
+            throw new RuntimeException("Error: Unable to create or write to the save file.", e);
         }
     }
 
@@ -47,8 +54,17 @@ public class Storage {
      */
     public void load(TaskList memory) {
         try {
+            File f = new File("data/save.txt");
+
+            // If file does not exist, create an empty one and return
+            if (!f.exists()) {
+                f.getParentFile().mkdirs(); // Ensure "data/" directory exists
+                f.createNewFile(); // Create empty save.txt
+                System.out.println("Warning: [save.txt] not found.");
+                return;
+            }
+
             memory.clear();
-            File f = new File("src/main/save.txt");
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 try {
@@ -58,9 +74,9 @@ public class Storage {
                     System.out.println(e.getMessage());
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw new InvalidFileFormatException("Warning: [save.txt] not found. If this is the first time"
-                    + "booting the app, please ignore.");
+            s.close();
+        } catch (Exception e) {
+            System.out.println("Error: Unable to load save file.");
         }
     }
 }
