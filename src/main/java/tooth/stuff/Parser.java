@@ -90,10 +90,14 @@ public class Parser {
             } else if (fromIndex == 0) {
                 throw new InvalidParamException("Missing the title");
             }
-            LocalDate from = LocalDate.parse(s.substring(fromIndex + 6, toIndex).trim());
-            LocalDate to = LocalDate.parse(s.substring(toIndex + 4).trim());
-            String eventString = s.substring(0, fromIndex).trim();
-            return new EventCommand(eventString, from, to);
+            try {
+                LocalDate from = LocalDate.parse(s.substring(fromIndex + 6, toIndex).trim());
+                LocalDate to = LocalDate.parse(s.substring(toIndex + 4).trim());
+                String eventString = s.substring(0, fromIndex).trim();
+                return new EventCommand(eventString, from, to);
+            } catch (RuntimeException e) {
+                throw new InvalidParamException("Wrong date format. Ensure it is in YYYY-MM-DD");
+            }
 
         case "deadline":
             int byIndex = s.indexOf("/by");
@@ -104,9 +108,13 @@ public class Parser {
             } else if (byIndex == 0) {
                 throw new InvalidParamException("Missing the title");
             }
-            LocalDate by = LocalDate.parse(s.substring(byIndex + 4).trim());
-            String dealineString = s.substring(0, byIndex).trim();
-            return new DeadlineCommand(dealineString, by);
+            try {
+                LocalDate by = LocalDate.parse(s.substring(byIndex + 4).trim());
+                String dealineString = s.substring(0, byIndex).trim();
+                return new DeadlineCommand(dealineString, by);
+            } catch (RuntimeException e) {
+                throw new InvalidParamException("Wrong date format. Ensure it is in YYYY-MM-DD");
+            }
 
         case "delete":
             if (pieces.length != 2) {
