@@ -9,6 +9,7 @@ import tooth.command.DeadlineCommand;
 import tooth.command.DeleteCommand;
 import tooth.command.EventCommand;
 import tooth.command.FindCommand;
+import tooth.command.HelpCommand;
 import tooth.command.ListCommand;
 import tooth.command.LoadCommand;
 import tooth.command.MarkCommand;
@@ -134,6 +135,12 @@ public class Parser {
                 throw new InvalidParamException("List does not have any description");
             }
             return new LoadCommand();
+
+        case "help":
+            if (pieces.length != 1) {
+                throw new InvalidParamException("Help does not have any description");
+            }
+            return new HelpCommand();
 
         default:
             throw new InvalidCommandException("tooth.command.Command " + command + " does not exist");
