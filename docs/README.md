@@ -73,7 +73,7 @@ Example: `mark 2`
 
 ![img_7.png](img_7.png)
 
-# Unmark task as INcomplete
+# Unmark task as Incomplete
 
 To unmark a class as incomplete, you can use the unmark command
 
