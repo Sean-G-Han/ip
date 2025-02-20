@@ -21,7 +21,7 @@ To look at list of commands, run the `help` command. Tooth will then list out al
 
 ![img_2.png](img_2.png)
 
-## Adding deadline
+## Adding deadlines
 
 Deadlines are tasks with a fix end-date
 
@@ -33,7 +33,7 @@ Take note of the format for date `YYYY-MMM-DD`
 
 ![img_3.png](img_3.png)
 
-## Adding event
+## Adding events
 
 Event are tasks with a fix end-date and a fixed start date
 
@@ -45,7 +45,7 @@ Take note of the format for date `YYYY-MMM-DD`
 
 ![img_4.png](img_4.png)
 
-## Adding todo
+## Adding todos
 
 Todo are tasks with neither end-date nor start date
 
