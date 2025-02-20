@@ -93,6 +93,6 @@ Example: `find home`
 
 ![img_9.png](img_9.png)
 
-# Saving and Loading
+# Saving and Loading Files
 
 Finally, use `save` to save the tasks in save.txt and `load` to load from save.txt 
