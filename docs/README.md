@@ -1,6 +1,6 @@
 # Tooth User Guide
 
-![img_1.png](img_1.png)
+![Ui.png](Ui.png)
 
 ## About
 Tooth is a task-managing chatbot optimised for CLI-commands fitted with some GUI elements
